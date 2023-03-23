@@ -74,3 +74,7 @@ end
 gem "dockerfile-rails", ">= 1.2", :group => :development
 
 gem "pg", "~> 1.4"
+
+gem "bootstrap", "= 4.6.2"
+
+gem "jquery-rails", "~> 4.5"
