@@ -57,6 +57,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
+  gem 'foreman', '~> 0.87.2'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -75,6 +76,6 @@ gem "dockerfile-rails", ">= 1.2", :group => :development
 
 gem "pg", "~> 1.4"
 
-gem "bootstrap", "= 4.6.2"
+gem "cssbundling-rails", "~> 1.1"
 
-gem "jquery-rails", "~> 4.5"
+gem "jsbundling-rails", "~> 1.1"
