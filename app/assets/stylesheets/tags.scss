@@ -13,3 +13,22 @@
     padding-left: 0.6em;
     border-radius: 10rem;
 }
+
+.nav-pills.outline-active {
+    .nav-link {
+        border-radius: 0px;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: transparent;
+        color: #aaa; 
+    }
+    .nav-link:hover {
+        color: #555; 
+    }
+    .nav-link.active {
+        background: #fff !important;
+        border-bottom: 2px solid #FF6600 !important;
+        color: #FF6600 !important;
+    }
+}
+  
