@@ -1,2 +1,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+@import './articles.scss';
+@import './tags.scss';
+
+
+a {
+    color: #FF6600;
+    text-decoration: none; 
+}
