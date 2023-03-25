@@ -1,10 +1,6 @@
 $fa-font-path: ".";
 
-$primary: #FF6600;
-
-$theme-colors: (
-  primary: $primary,
-);
+// $primary: #FF6600;
 
 a {
     text-decoration: none !important;; 
@@ -28,6 +24,8 @@ a {
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "@fortawesome/fontawesome-free/scss/solid.scss";
-@import './articles.scss';
+@import "./article-meta.scss";
 @import './tags.scss';
+@import './home.scss';
+@import './article.scss';
 

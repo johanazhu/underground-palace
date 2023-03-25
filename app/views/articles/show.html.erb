@@ -1,9 +1,71 @@
 
-<%= render @article %>
 
-<div>
-  <%= link_to "Edit this article", edit_article_path(@article) %> |
-  <%= link_to "Back to articles", articles_path %>
 
-  <%= button_to "Destroy this article", @article, method: :delete %>
+<div class="article-page">
+  <%= render "banner" %>
+  <div class="container page">
+
+    <div class="row article-content">
+      <div class="col-md-12">
+        <p>Web development technologies have evolved at an incredible clip over the past few years. We&#39;ve gone from rudimentary DOM manipulation with libraries like jQuery to supercharged web applications organized &amp; powered by elegant MV* based frameworks like AngularJS. Pair this with significant increases in browser rendering speeds, and it is now easier than ever before to build production quality applications on top of Javascript, HTML5, and CSS3.</p>
+      </div>
+    </div>
+
+    <hr />
+
+   <%= render "actions" %>
+
+  <div class="row">
+
+      <div class="col-xs-12 col-md-8 offset-md-2">
+
+        <form class="card comment-form mb-3">
+          <div class="card-block">
+            <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+          </div>
+          <div class="card-footer">
+            <img src="https://api.realworld.io/images/smiley-cyrus.jpeg" class="comment-author-img" />
+            <button type="submit" class="btn btn-sm btn-primary">
+             发表评论
+            </button>
+          </div>
+        </form>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <a href="profile.html" class="comment-author">
+              <img src="https://api.realworld.io/images/demo-avatar.png" class="comment-author-img" />
+            </a>
+            &nbsp;
+            <a href="profile.html" class="comment-author">Jacob Schmidt</a>
+            <span class="date-articleed">Dec 29th</span>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <a href="profile.html" class="comment-author">
+              <img src="https://api.realworld.io/images/demo-avatar.png" class="comment-author-img" />
+            </a>
+            &nbsp;
+            <a href="profile.html" class="comment-author">Jacob Schmidt</a>
+            <span class="date-articleed">Dec 29th</span>
+            <span class="mod-options">
+              <i class="ion-edit"></i>
+              <i class="ion-trash-a"></i>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+  </div>
+
+  </div>
 </div>

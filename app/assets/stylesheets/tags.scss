@@ -36,8 +36,8 @@
     }
     .nav-link.active {
         background: #fff !important;
-        border-bottom: 2px solid #FF6600 !important;
-        color: #FF6600 !important;
+        border-bottom: 2px solid $primary !important;
+        color: $primary!important;
     }
 }
   
