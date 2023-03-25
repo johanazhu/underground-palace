@@ -1,10 +1,17 @@
+
+
+$primary: #FF6600;
+
+$theme-colors: (
+  primary: $primary,
+);
+
+a {
+    text-decoration: none !important;; 
+}
+
+
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import './articles.scss';
 @import './tags.scss';
-
-
-a {
-    color: #FF6600;
-    text-decoration: none; 
-}

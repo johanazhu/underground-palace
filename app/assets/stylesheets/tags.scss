@@ -7,12 +7,21 @@
     margin-right: 3px;
     margin-bottom: 0.2rem;
     display: inline-block;
+    &:hover {
+        text-decoration: none; 
+    }
+    &.tag-outline {
+        border: 1px solid #ddd;
+        color: #aaa !important;
+        background: none !important; 
+    }
 }
 .tag-pill {
     padding-right: 0.6em;
     padding-left: 0.6em;
     border-radius: 10rem;
 }
+  
 
 .nav-pills.outline-active {
     .nav-link {

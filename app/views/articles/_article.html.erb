@@ -1,4 +1,4 @@
-<div id="<%= dom_id article %>">
+<!-- <div id="<%= dom_id article %>">
   <p>
     <strong>Title:</strong>
     <%= article.title %>
@@ -14,4 +14,36 @@
     <%= article.body %>
   </p>
 
+</div> -->
+
+<div class="article-preview">
+  <div class="article-meta">
+    <a href="profile.html">
+      <img src="https://api.realworld.io/images/demo-avatar.png" />
+    </a>
+    <div class="info">
+      <a href="profile.html" class="author">作者名字</a>
+      <span class="date">December 9, 2022</span>
+    </div>
+    <!-- 喜欢按钮，喜欢个数 -->
+    <button class="btn btn-outline-primary btn-sm float-end">
+      <i class="ion-heart"></i>   715
+    </button>
+  </div>
+  <a href="article.html" class="article-link">
+    <h1><%= article.title %></h1>
+    <p><%= article.description %></p>
+    <span>Read more...</span>
+    <ul class="tag-list">
+      <li class="tag-default tag-pill tag-outline">
+        读书
+      </li>
+      <li class="tag-default tag-pill tag-outline">
+        技术
+      </li>
+      <li class="tag-default tag-pill tag-outline">
+        兴趣
+      </li>
+    </ul>
+  </a>
 </div>
