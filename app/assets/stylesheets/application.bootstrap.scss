@@ -1,4 +1,4 @@
-
+$fa-font-path: ".";
 
 $primary: #FF6600;
 
@@ -13,5 +13,8 @@ a {
 
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
 @import './articles.scss';
 @import './tags.scss';
+
