@@ -10,6 +10,19 @@ a {
     text-decoration: none !important;; 
 }
 
+.nav {
+    .nav-link {
+        display: block;
+        padding-top: 0.425rem;
+        padding-bottom: 0.425rem;
+        color: rgba(0, 0, 0, 0.3);
+        &:focus, &:hover {
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}
+
+
 
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
