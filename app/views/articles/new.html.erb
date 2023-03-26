@@ -1,4 +1,4 @@
-<h1>New article</h1>
+<!-- <h1>New article</h1>
 
 <%= render "form", article: @article %>
 
@@ -6,4 +6,34 @@
 
 <div>
   <%= link_to "Back to articles", articles_path %>
+</div> -->
+
+<div class="editor-page">
+  <div class="container mt-4">
+    <div class="row">
+
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <form>
+          <fieldset class="form-group mt-2">
+            <input class="form-control form-control-lg" type="text" placeholder="文章标题">
+          </fieldset>
+          <fieldset class="form-group mt-2">
+            <textarea class="form-control" rows="8" placeholder="用 Markdown 编写您的文章"></textarea>
+          </fieldset>
+          <fieldset class="form-group mt-2">
+            <input class="form-control" type="text" placeholder="输入标签">
+            <!-- <div class="tag-list">
+              <span class="label label-pill label-default"><i class="ion-close-round"></i> programming</span>
+              <span class="label label-pill label-default"><i class="ion-close-round"></i> javascript</span>
+              <span class="label label-pill label-default"><i class="ion-close-round"></i> webdev</span>
+            </div> -->
+          </fieldset>
+          <button class="btn btn-lg btn-primary float-end mt-2">
+            发表文章
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>
