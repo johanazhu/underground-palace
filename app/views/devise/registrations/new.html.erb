@@ -1,0 +1,44 @@
+
+<div class="auth-page">
+  <div class="container mt-4">
+    <div class="row">
+
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-center ">
+          注册
+        </h1>
+        <p class="text-center">
+          <a ui-sref="app.login" href="#/login">
+            有一个账户？
+          </a>
+          <a ui-sref="app.register" href="#/register">
+            需要一个帐户？
+          </a>
+        </p>
+
+        <!-- 错误提示 -->
+        <ul class="error-messages">
+          <li>这个邮箱已存在</li>
+        </ul>
+
+        <form>
+          <fieldset class="form-group mb-3">
+            <input class="form-control form-control-lg" type="text" placeholder="用户名">
+          </fieldset>
+          <fieldset class="form-group mb-3">
+            <input class="form-control form-control-lg" type="email" placeholder="邮箱">
+          </fieldset>
+          <fieldset class="form-group mb-3">
+            <input class="form-control form-control-lg" type="password" placeholder="密码">
+          </fieldset>
+          <button class="btn btn-lg btn-primary float-end">
+            注册
+          </button>
+        </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
