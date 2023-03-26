@@ -1,26 +1,36 @@
-<h2>Log in</h2>
+<div class="auth-page">
+  <div class="container mt-4">
+    <div class="row">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-center">登录</h1>
+        <p class="text-center">
+          <a href="#/login" >
+            是否有账号？
+          </a>
+          <a href="#/register">
+            需要一个账号？
+          </a>
+        </p>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+       <!-- 错误提示 -->
+       <ul class="error-messages">
+        <li>这个邮箱已存在</li>
+      </ul>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <form>
+        <fieldset class="form-group mb-3">
+          <input class="form-control form-control-lg" type="email" placeholder="邮箱">
+        </fieldset>
+        <fieldset class="form-group mb-3">
+          <input class="form-control form-control-lg" type="password" placeholder="密码">
+        </fieldset>
+        <button class="btn btn-lg btn-primary float-end">
+          登录
+        </button>
+      </form>
+
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
