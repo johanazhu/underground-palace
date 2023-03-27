@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   # 将默认登录路由更改为 /login：
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
