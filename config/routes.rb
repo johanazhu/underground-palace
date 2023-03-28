@@ -15,10 +15,13 @@ Rails.application.routes.draw do
   end
 
 
-
+  # 复数形式
   resources :articles
 
-  resources :settings, only: [:index]
+  # resources :settings, only: [:index, :update]
+  # 单数形式
+  resource :settings
+  # , only: [:show, :update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
