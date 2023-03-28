@@ -4,22 +4,14 @@
     <div class="row">
 
       <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-center ">
-          注册
-        </h1>
+        <h1 class="text-center ">注册</h1>
         <p class="text-center">
-          <a ui-sref="app.login" href="#/login">
-            有一个账户？
-          </a>
-          <a ui-sref="app.register" href="#/register">
-            需要一个帐户？
-          </a>
+          <%= link_to '有一个账户？', login_path %>
         </p>
 
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
-          <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
           <div class="form-group mb-3">
             <%= f.text_field :username, autofocus: true, autocomplete: "username", 
             class: "form-control form-control-lg",
@@ -33,10 +25,6 @@
           </div>
 
           <div class="form-group mb-3">
-            <%= f.label :password %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
             <%= f.password_field :password, autocomplete: "new-password", 
             class: "form-control form-control-lg",
             placeholder: "密码" %>
