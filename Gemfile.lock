@@ -96,6 +96,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.11.0)
+      devise (>= 4.9.0)
     dockerfile-rails (1.2.5)
       rails
     erubi (1.12.0)
@@ -237,6 +239,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.1)
   debug
   devise (~> 4.9)
+  devise-i18n
   dockerfile-rails (>= 1.2)
   foreman (~> 0.87.2)
   importmap-rails

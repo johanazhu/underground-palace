@@ -25,8 +25,9 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
+        format.html { redirect_to article_url(@article) }
         format.json { render :show, status: :created, location: @article }
+        flash[:notice] = "文章创建成功"
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @article.errors, status: :unprocessable_entity }
@@ -38,8 +39,9 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to article_url(@article), notice: "Article was successfully updated." }
+        format.html { redirect_to article_url(@article) }
         format.json { render :show, status: :ok, location: @article }
+        flash[:notice] = "文章更新成功"
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @article.errors, status: :unprocessable_entity }
@@ -52,8 +54,9 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
+      format.html { redirect_to articles_url }
       format.json { head :no_content }
+      flash[:notice] = "文章删除成功"
     end
   end
 
