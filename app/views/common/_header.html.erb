@@ -24,9 +24,10 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link px-2">
-              <i class="fa-solid fa-face-smile"></i>&nbsp; <%= current_user.username %> 
-            </a>
+            <%= link_to profile_path(current_user.username), class: "nav-link px-2" do %>
+              <%= image_tag current_user.avatar, alt: "avatar", class: "user-pic" %>
+              <%= current_user.username %>
+            <% end %>
           </li>
         </ul>
       <% end %> 

@@ -20,8 +20,12 @@ Rails.application.routes.draw do
 
   # resources :settings, only: [:index, :update]
   # 单数形式
-  resource :settings
-  # , only: [:show, :update]
+  resource :settings, only: [:show, :update]
+
+  # resources :profile
+  # get 'profile', to: 'profiles#show', as: 'profile'
+  get '/:name', to: 'profile#show', as: :profile
+  # , only: [:show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
