@@ -30,7 +30,7 @@
       <i class="fa-solid fa-heart"></i> 715
     </button>
   </div>
-  <a href="article.html" class="article-link">
+  <%= link_to article, class: "article-link" do %>
     <h1><%= article.title %></h1>
     <p><%= article.description %></p>
     <span>Read more...</span>
@@ -45,5 +45,6 @@
         兴趣
       </li>
     </ul>
-  </a>
+  <% end %>
+
 </div>
