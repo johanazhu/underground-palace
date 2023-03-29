@@ -22,15 +22,11 @@
             class: "form-control",
             placeholder: "用 Markdown 编写您的文章" %>
           </div>
-<!-- 
-          <fieldset class="form-group mt-2">
-            <input class="form-control" type="text" placeholder="输入标签">
-            <div class="tag-list">
-              <span class="label label-pill label-default"><i class="ion-close-round"></i> programming</span>
-              <span class="label label-pill label-default"><i class="ion-close-round"></i> javascript</span>
-              <span class="label label-pill label-default"><i class="ion-close-round"></i> webdev</span>
-            </div>
-          </fieldset> -->
+          <!-- <div class="form-group mt-3">
+                  <%= f.text_field :body, rows: 6, autofocus: true, autocomplete: "body", 
+                  class: "form-control",
+                  placeholder: "输入标签" %>
+                </div> -->
 
           <%= f.submit "发表文章", class: "btn btn-lg btn-primary float-end mt-2" %>
         <% end %>
@@ -42,3 +38,4 @@
     </div>
   </div>
 </div>
+

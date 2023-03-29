@@ -8,30 +8,35 @@
             <img src="https://api.realworld.io/images/demo-avatar.png" />
         </a>
         <div class="info">
-          <a href="profile.html" class="author">Eric Simons</a>
-          <span class="date">January 20th</span>
+          <a href="profile.html" class="author"><%= @user.username %></a>
+          <span class="date"><%= @article.created_at %></span>
         </div>
         <!-- 是否是自己，自己的话，编辑和删除，别人的话，关注作者和收藏文章-->
-        <%= link_to edit_article_path, class: "btn btn-sm btn-outline-secondary" do %>
-          <i class="fa-solid fa-pen-to-square"></i>&nbsp;编辑文章 
-        <% end %>
-        <%= button_to article_path, method: :delete, form_class: "d-inline-block", class: "btn btn-sm btn-outline-danger" do %>
-          <i class="fa-solid fa-trash"></i>&nbsp;删除文章 
-        <% end %>
+        <% if @article.user_id == current_user.id %>
+        
+          <%= link_to edit_article_path, class: "btn btn-sm btn-outline-secondary" do %>
+            <i class="fa-solid fa-pen-to-square"></i>&nbsp;编辑文章 
+          <% end %>
+          <%= button_to article_path, method: :delete, form_class: "d-inline-block", class: "btn btn-sm btn-outline-danger" do %>
+            <i class="fa-solid fa-trash"></i>&nbsp;删除文章 
+          <% end %>
 
-        <!-- <button class="btn btn-sm btn-outline-secondary">
-            <i class="fa-solid fa-plus"></i>
+        <% else %>
+
+          <button class="btn btn-sm btn-outline-secondary">
+              <i class="fa-solid fa-plus"></i>
+            &nbsp;
+            关注作者 <span class="counter">(10)</span>
+          </button>
           &nbsp;
-          关注作者 <span class="counter">(10)</span>
-        </button>
-        &nbsp;&nbsp;
-        <button class="btn btn-sm btn-outline-primary">
-            <i class="fa-solid fa-heart"></i> -->
-            <!-- 不喜欢 -->
-            <!-- <i class="fa-regular fa-heart"></i> -->
-          <!-- &nbsp;
-          收藏文章 <span class="counter">(29)</span>
-        </button> -->
+          <button class="btn btn-sm btn-outline-primary">
+              <i class="fa-solid fa-heart"></i>
+              <!-- <i class="fa-regular fa-heart"></i> -->
+                &nbsp;
+            收藏文章 <span class="counter">(29)</span>
+          </button>
+
+        <% end %>
       </div>
 
     </div>

@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /articles or /articles.json
   def index
@@ -8,11 +9,17 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1 or /articles/1.json
   def show
+    puts "========================"
+
+    @user = User.find_by(id: @article.user_id)
+    p @user
+    puts "+++++++++++++++++++++++++"
   end
 
   # GET /articles/new
   def new
-    @article = Article.new
+    # @article = Article.new
+    @article = current_user.articles.build
   end
 
   # GET /articles/1/edit
@@ -21,7 +28,8 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.build(article_params)
+
 
     respond_to do |format|
       if @article.save
@@ -51,7 +59,6 @@ class ArticlesController < ApplicationController
 
   # DELETE /articles/1 or /articles/1.json
   def destroy
-    puts "=================================================="
     @article.destroy
 
     respond_to do |format|
@@ -69,6 +76,14 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :description, :body)
+      params.require(:article).permit(:title, :description, :body, :user_id)
     end
-end
+
+
+    def render_article
+      format.html { redirect_to article_url(@article) }
+      # format.html { redirect_to article_url(@article) }
+      # format.json { render :show, status: :created, location: @article }
+      # render json: { article: @article.as_json({}, @current_user) }
+    end
+end 

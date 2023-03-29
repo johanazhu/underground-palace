@@ -9,4 +9,9 @@ class User < ApplicationRecord
   # attr_accessible :email, :password, :password_confirmation, :remember_me, :username
   # attr_accessible :username, :email, :password, :password_confirmation, :remember_me,
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 3, maximum: 25 }
+
+
+  
+  has_many :articles, dependent: :destroy
+
 end
