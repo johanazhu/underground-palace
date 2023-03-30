@@ -26,14 +26,10 @@
 
             <% end %>
 
-
-           
-            
             <hr>
 
-            <button class="btn btn-outline-danger" type="submit">
-                退出登录
-            </button>
+            <%= button_to "退出登录", destroy_user_session_path, method: :delete, 
+            class: "btn btn-outline-danger" %>
         </div>
   
       </div>
