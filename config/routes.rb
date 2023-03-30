@@ -16,7 +16,10 @@ Rails.application.routes.draw do
 
 
   # 复数形式
-  resources :articles
+  # resources :articles
+  resources :articles do
+    resources :comments, only: [:create, :destroy]
+  end
 
   # resources :settings, only: [:index, :update]
   # 单数形式

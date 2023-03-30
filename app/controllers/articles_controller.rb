@@ -9,6 +9,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1 or /articles/1.json
   def show
+    p "++++++++++++++++++++++"
+    p @article.comments
   end
 
   # GET /articles/new
@@ -24,7 +26,6 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = current_user.articles.build(article_params)
-
 
     respond_to do |format|
       if @article.save

@@ -49,9 +49,9 @@
 
         <% @profile.articles.each do |article| %>
           <div class="article-preview"> 
+            
             <div class="article-meta mb-3">
               
-
               <%= link_to profile_path(article.user.username) do %>
                 <%= image_tag article.user.avatar, alt: "avatar" %>
               <% end %>
