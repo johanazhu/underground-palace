@@ -53,15 +53,17 @@
                 
                 <span class="date-articleed"><%= comment.created_at.strftime("%B %d, %Y") %></span>
               
-                <span class="mod-options">
+                <% if comment.user == current_user %>
+                  <span class="mod-options">
 
-                  <%= button_to [comment.article, comment],
-                              method: :delete,
-                              class: "btn btn-link text-reset" do %>
-                    <i class="fa fa-trash"></i>
-                  <% end %>
-                
-                </span>
+                    <%= button_to [comment.article, comment],
+                                method: :delete,
+                                class: "btn btn-link text-reset" do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  
+                  </span>
+                <% end %>
 
               </div>
             </div>
