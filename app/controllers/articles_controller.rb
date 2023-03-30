@@ -64,21 +64,21 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def article_params
-      params.require(:article).permit(:title, :description, :body, :user_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def article_params
+    params.require(:article).permit(:title, :description, :body, :user_id)
+  end
 
 
-    def render_article
-      format.html { redirect_to article_url(@article) }
-      # format.html { redirect_to article_url(@article) }
-      # format.json { render :show, status: :created, location: @article }
-      # render json: { article: @article.as_json({}, @current_user) }
-    end
+  def render_article
+    format.html { redirect_to article_url(@article) }
+    # format.html { redirect_to article_url(@article) }
+    # format.json { render :show, status: :created, location: @article }
+    # render json: { article: @article.as_json({}, @current_user) }
+  end
 end 
