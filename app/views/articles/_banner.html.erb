@@ -4,13 +4,15 @@
       <h1><%= @article.title %></h1>
 
       <div class="article-meta">
-        <a href="profile.html">
-            <img src="https://api.realworld.io/images/demo-avatar.png" />
-        </a>
+        <%= link_to profile_path(@article.user.username) do %>
+          <%= image_tag @article.user.avatar, alt: "avatar" %>
+        <% end %>
+
         <div class="info">
-          <a href="profile.html" class="author"><%= @user.username %></a>
-          <span class="date"><%= @article.created_at %></span>
+          <%= link_to @article.user.username, profile_path(@article.user.username), class: 'author' %>
+          <span class="date"><%= @article.created_at.strftime("%B %d, %Y") %></span>
         </div>
+        
         <!-- 是否是自己，自己的话，编辑和删除，别人的话，关注作者和收藏文章-->
         <% if @article.user_id == current_user.id %>
         

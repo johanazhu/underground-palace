@@ -9,11 +9,6 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1 or /articles/1.json
   def show
-    puts "========================"
-
-    @user = User.find_by(id: @article.user_id)
-    p @user
-    puts "+++++++++++++++++++++++++"
   end
 
   # GET /articles/new

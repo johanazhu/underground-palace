@@ -1,35 +1,22 @@
-<!-- <div id="<%= dom_id article %>">
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= article.description %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= article.body %>
-  </p>
-
-</div> -->
-
 <div class="article-preview">
   <div class="article-meta mb-3">
-    <a href="profile.html">
-      <img src="https://api.realworld.io/images/demo-avatar.png" />
-    </a>
+  
+    <%= link_to profile_path(article.user.username) do %>
+      <%= image_tag article.user.avatar, alt: "avatar" %>
+    <% end %>
+
     <div class="info">
-      <a href="profile.html" class="author">作者名字</a>
-      <span class="date">December 9, 2022</span>
+      <%= link_to article.user.username, profile_path(article.user.username), class: 'author' %>
+      <span class="date"><%= article.created_at.strftime("%B %d, %Y") %></span>
     </div>
+
     <!-- 喜欢按钮，喜欢个数 -->
     <button class="btn btn-outline-primary btn-sm float-end">
       <i class="fa-solid fa-heart"></i> 715
     </button>
+
   </div>
+  
   <%= link_to article, class: "article-link" do %>
     <h1><%= article.title %></h1>
     <p><%= article.description %></p>
