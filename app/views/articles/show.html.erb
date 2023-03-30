@@ -44,12 +44,12 @@
               </div>
 
               <div class="card-footer">
-                <%= link_to profile_path(comment.user.username), class: "comment-author" do %>
+                <%= link_to user_profile_path(comment.user.username), class: "comment-author" do %>
                   <%= image_tag comment.user.avatar, alt: "avatar", class: "comment-author-img" %>
                 <% end %>
                 &nbsp;
 
-                <%= link_to comment.user.username, profile_path(comment.user.username), class: 'comment-author' %>
+                <%= link_to comment.user.username, user_profile_path(comment.user.username), class: 'comment-author' %>
                 
                 <span class="date-articleed"><%= comment.created_at.strftime("%B %d, %Y") %></span>
               

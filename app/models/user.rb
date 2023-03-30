@@ -15,4 +15,17 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+
+  has_and_belongs_to_many :following,
+  class_name: 'User',
+  join_table: 'relationships',
+  foreign_key: 'follower_id',
+  association_foreign_key: 'following_id'
+
+  has_and_belongs_to_many :followers,
+  class_name: 'User',
+  join_table: 'relationships',
+  foreign_key: 'following_id',
+  association_foreign_key: 'follower_id'
+
 end

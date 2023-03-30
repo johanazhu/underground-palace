@@ -1,12 +1,12 @@
 <div class="article-preview">
   <div class="article-meta mb-3">
   
-    <%= link_to profile_path(article.user.username) do %>
+    <%= link_to user_profile_path(article.user.username) do %>
       <%= image_tag article.user.avatar, alt: "avatar" %>
     <% end %>
 
     <div class="info">
-      <%= link_to article.user.username, profile_path(article.user.username), class: 'author' %>
+      <%= link_to article.user.username, user_profile_path(article.user.username), class: 'author' %>
       <span class="date"><%= article.created_at.strftime("%B %d, %Y") %></span>
     </div>
 
