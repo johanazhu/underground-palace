@@ -28,4 +28,16 @@ class User < ApplicationRecord
   foreign_key: 'following_id',
   association_foreign_key: 'follower_id'
 
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  def follow(user)
+    following << user unless following.include? user   
+  end
+
+  def unfollow(user)
+    following.delete(user)
+  end
+
 end
