@@ -23,25 +23,32 @@
     <% else %>
 
 
-            <% if current_user.following?(@article.user) %>
-                <%= button_to unfollow_user_path(@article.user.username), method: :delete, remote: true,
-                 form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "unfollow-button" do %>
-                    取消关注 <%= @article.user.username %>
-                <% end %>
-            <% else %>
-                <%= button_to follow_user_path(@article.user.username), method: :post, remote: true,
-                form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
-                    <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @article.user.username %>
-                <% end %>
+        <% if current_user.following?(@article.user) %>
+            <%= button_to unfollow_user_path(@article.user.username), method: :delete, remote: true,
+                form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "unfollow-button" do %>
+                取消关注 <%= @article.user.username %>
             <% end %>
+        <% else %>
+            <%= button_to follow_user_path(@article.user.username), method: :post, remote: true,
+                form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
+                <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @article.user.username %>
+            <% end %>
+        <% end %>
        
         &nbsp;
-        <button class="btn btn-sm btn-outline-primary">
-            <i class="fa-solid fa-heart"></i>
-            <!-- <i class="fa-regular fa-heart"></i> -->
-                &nbsp;
-            喜欢文章 <span class="counter">(29)</span>
-        </button>
+        
+        <% if @article.liked_by?(current_user) %>
+            <%= button_to like_article_path(@article), method: :post, remote: true,
+                form_class: "d-inline-block", class: "btn btn-sm btn-outline-primary" do %>
+                喜欢文章 <span class="counter"><%= @article.likes.count %></span>
+            <% end %>
+        <% else %>
+            <%= button_to unlike_article_path(@article), method: :delete, remote: true,
+                form_class: "d-inline-block", class: "btn btn-sm btn-outline-primary" do %>
+                不喜欢文章 <span class="counter"><%= @article.likes.count %></span>
+            <% end %>
+        <% end %>
+
 
     <% end %>
 

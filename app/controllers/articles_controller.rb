@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, only: %i[ show edit update destroy like unlike ]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /articles or /articles.json
@@ -62,13 +62,26 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def like
+    unless @article.liked_by?(current_user)
+      @like = @article.likes.create(user_id: current_user.id)
+    end
+    redirect_to @article
+  end
+
+  def unlike
+    if @article.liked_by?(current_user)
+      @like = @article.likes.find_by(user_id: current_user.id)
+      @like.destroy
+    end
+    redirect_to @article
+  end
+
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_article
     @article = Article.find(params[:id])
-    p @article
-    # @user = @article.user
-    # @article.user = user
   end
 
   # Only allow a list of trusted parameters through.

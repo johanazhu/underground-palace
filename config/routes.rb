@@ -20,6 +20,12 @@ Rails.application.routes.draw do
   # resources :articles
   resources :articles do
     resources :comments, only: [:create, :destroy]
+
+    member do
+      post 'like'
+      delete 'unlike'
+    end
+    
   end
 
   # resources :settings, only: [:index, :update]
