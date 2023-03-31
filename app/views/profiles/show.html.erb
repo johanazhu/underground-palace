@@ -5,12 +5,12 @@
       <div class="row">
 
         <div class="col-md-10 col-md-offset-1">
-          <%= image_tag @profile.avatar, alt: "avatar", class: "user-img" %>
-          <h4><%= @profile.username %></h4>
-          <p><%= @profile.bio %></p>
+          <%= image_tag @user.avatar, alt: "avatar", class: "user-img" %>
+          <h4><%= @user.username %></h4>
+          <p><%= @user.bio %></p>
 
 
-          <% if @profile.id == current_user.id %>
+          <% if @user.id == current_user.id %>
 
             <%= link_to settings_path, class: "btn btn-sm btn-outline-secondary action-btn" do %>
               <i class="fa-solid fa-gear"></i>&nbsp; 编辑个人信息
@@ -21,7 +21,7 @@
             <button class="btn btn-sm btn-outline-secondary action-btn">
               <i class="fa-solid fa-plus"></i>
               &nbsp;
-              关注 <%= @profile.username %> <span class="counter">(10)</span>
+              关注 <%= @user.username %> <span class="counter">(10)</span>
             </button>
 
           <% end %>
@@ -47,7 +47,7 @@
           </ul>
         </div>
 
-        <% @profile.articles.each do |article| %>
+        <% @user.articles.each do |article| %>
           <div class="article-preview"> 
 
             <div class="article-meta mb-3">
@@ -61,7 +61,6 @@
                 <span class="date"><%= article.created_at.strftime("%B %d, %Y") %></span>
               </div>
         
-
               <!-- 喜欢按钮，喜欢个数 -->
               <button class="btn btn-outline-primary btn-sm float-end">
                 <i class="fa-solid fa-heart"></i> 715
