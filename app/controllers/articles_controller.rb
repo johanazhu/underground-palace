@@ -66,7 +66,10 @@ class ArticlesController < ApplicationController
     unless @article.liked_by?(current_user)
       @like = @article.likes.create(user_id: current_user.id)
     end
-    redirect_to @article
+    respond_to do |format|
+        format.js
+    end
+    # redirect_to @article
   end
 
   def unlike
@@ -74,7 +77,10 @@ class ArticlesController < ApplicationController
       @like = @article.likes.find_by(user_id: current_user.id)
       @like.destroy
     end
-    redirect_to @article
+    respond_to do |format|
+        format.js
+    end
+    # redirect_to @article
   end
 
 
