@@ -23,10 +23,14 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    @article = current_user.articles.build(article_params)
+    p "cretae =================="
+    p article_params
+    # @article = current_user.articles.build(article_params)
+    @article = current_user.articles.new(article_params.except(:tagList))
 
     respond_to do |format|
       if @article.save
+        @article.sync_tags(article_params[:tagList])
         format.html { redirect_to article_url(@article) }
         format.json { render :show, status: :created, location: @article }
         flash[:notice] = "文章创建成功"
@@ -69,7 +73,6 @@ class ArticlesController < ApplicationController
     respond_to do |format|
         format.js
     end
-    # redirect_to @article
   end
 
   def unlike
@@ -80,7 +83,6 @@ class ArticlesController < ApplicationController
     respond_to do |format|
         format.js
     end
-    # redirect_to @article
   end
 
 
@@ -92,7 +94,7 @@ class ArticlesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def article_params
-    params.require(:article).permit(:title, :description, :body, :user_id)
+    params.require(:article).permit(:title, :description, :body, tagList: [])
   end
 
 
