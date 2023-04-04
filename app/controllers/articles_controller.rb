@@ -13,7 +13,6 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    # @article = Article.new
     @article = current_user.articles.build
   end
 
@@ -23,14 +22,11 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    p "cretae =================="
-    p article_params
-    # @article = current_user.articles.build(article_params)
-    @article = current_user.articles.new(article_params.except(:tagList))
+    @article = current_user.articles.new(article_params.except(:tag_list))
 
     respond_to do |format|
       if @article.save
-        @article.sync_tags(article_params[:tagList])
+        @article.sync_tags(article_params[:tag_list])
         format.html { redirect_to article_url(@article) }
         format.json { render :show, status: :created, location: @article }
         flash[:notice] = "文章创建成功"
@@ -44,7 +40,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1 or /articles/1.json
   def update
     respond_to do |format|
-      if @article.update(article_params)
+      if @article.update(article_params.except(:tag_list))
         format.html { redirect_to article_url(@article) }
         format.json { render :show, status: :ok, location: @article }
         flash[:notice] = "文章更新成功"
@@ -94,7 +90,7 @@ class ArticlesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def article_params
-    params.require(:article).permit(:title, :description, :body, tagList: [])
+    params.require(:article).permit(:title, :description, :body, :tag_list)
   end
 
 

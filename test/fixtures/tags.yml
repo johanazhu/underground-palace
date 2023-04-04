@@ -2,8 +2,6 @@
 
 one:
   name: MyString
-  article: one
 
 two:
   name: MyString
-  article: two

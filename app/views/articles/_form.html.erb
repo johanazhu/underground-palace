@@ -1,32 +1,69 @@
-<%= form_with(model: article) do |form| %>
-  <% if article.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-      <ul>
-        <% article.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+<%= form_for @article, id: "form_box" do |f| %>
+  <div class="form-group mt-3">
+    <%= f.text_field :title, autofocus: true, autocomplete: "title", 
+    class: "form-control form-control-lg",
+    placeholder: "文章标题" %>
+  </div>
+    
+  <div class="form-group mt-3">
+    <%= f.text_field :description, autofocus: true, autocomplete: "description", 
+    class: "form-control",
+    placeholder: "简介" %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= f.text_area :body, rows: 6, autofocus: true, autocomplete: "body", 
+    class: "form-control",
+    placeholder: "用 Markdown 编写您的文章" %>
+  </div>
+  <div class="form-group mt-3">
+    <%= f.hidden_field :tag_list, id: 'tag-input' %>
+    <input 
+      id="tag-field"
+      class="form-control" 
+      type="text"
+      placeholder="输入标签" 
+      onkeydown="addToList(event)"
+      >
+
+    <div class="tag-list mt-1" id="tag-list">
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= f.submit @article.persisted? ? "更新文章" : "发表文章", 
+    class: "btn btn-lg btn-primary float-end mt-2" %>
 <% end %>
+
+
+<script>
+  function addToList(event) {
+      if (event.keyCode === 13) {  // 判断是否为回车键
+        event.preventDefault();  // 阻止默认行为（即提交表单）
+
+        const tagInput = document.getElementById("tag-input");
+        const tagField = document.getElementById("tag-field");
+        const list = document.getElementById("tag-list");
+        let span = `   
+          <span class="badge bg-secondary rounded-pill">
+            <i class="fa-solid fa-xmark"></i>
+            ${tagField.value}
+          </span>`
+        list.insertAdjacentHTML('beforeend', span);
+    
+
+        let form = document.getElementById("new_article");
+        let tagList = document.getElementById("tag-list")
+
+        const currentTags = JSON.parse(tagInput.value || '[]')
+        console.log(currentTags)
+        currentTags.push(tagField.value)
+        tagInput.value = JSON.stringify(currentTags)
+
+
+        tagField.value = "";
+
+      }
+  }
+</script>
