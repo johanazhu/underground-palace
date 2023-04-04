@@ -10,6 +10,15 @@
         <p>
           <%= @article.body %>
         </p>
+        <ul class="tag-list p-0">
+          <%= render "tag", article: @article %>
+          <!-- <% @article.tags.each do | tag | %>
+            <li class="tag-default tag-pill tag-outline">
+              <%= tag.name %>
+
+            </li>
+          <% end %> -->
+        </ul>
       </div>
     </div>
 

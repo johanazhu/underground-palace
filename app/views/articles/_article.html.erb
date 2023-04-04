@@ -35,15 +35,7 @@
     <p><%= article.description %></p>
     <span>Read more...</span>
     <ul class="tag-list">
-      <li class="tag-default tag-pill tag-outline">
-        读书
-      </li>
-      <li class="tag-default tag-pill tag-outline">
-        技术
-      </li>
-      <li class="tag-default tag-pill tag-outline">
-        兴趣
-      </li>
+      <%= render "tag", article: article %>
     </ul>
   <% end %>
 
