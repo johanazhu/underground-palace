@@ -5,6 +5,11 @@ class ArticlesController < ApplicationController
   # GET /articles or /articles.json
   def index
     @articles = Article.all
+    # 获取最受欢迎的十大标签
+    tag_counts = Tag.joins(:articles_tags).group(:tag_id).order('count_all desc').limit(10).count
+    popular_tag_ids = tag_counts.keys
+    @popular_tags = Tag.where(id: popular_tag_ids).sort_by { |t| popular_tag_ids.index(t.id) }
+ 
   end
 
   # GET /articles/1 or /articles/1.json
@@ -22,12 +27,14 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
+    p "11111111111111111111111"
+    p "current_user.articles"
     @article = current_user.articles.new(article_params.except(:tag_list))
 
     respond_to do |format|
       if @article.save
         @article.sync_tags(article_params[:tag_list])
-        format.html { redirect_to article_url(@article) }
+        format.html { redirect_to article_url(@article.slug) }
         format.json { render :show, status: :created, location: @article }
         flash[:notice] = "文章创建成功"
       else
@@ -40,8 +47,15 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1 or /articles/1.json
   def update
     respond_to do |format|
+      p "++++++++++++++++++++++++++"
+      p article_params
+      p  @article
+      
+      # p current_user.article
       if @article.update(article_params.except(:tag_list))
-        format.html { redirect_to article_url(@article) }
+      # if current_user.articles.update(article_params.except(:tag_list))
+        # current_user.articles.sync_tags(article_params[:tag_list])
+        format.html { redirect_to article_url(@article.slug) }
         format.json { render :show, status: :ok, location: @article }
         flash[:notice] = "文章更新成功"
       else
@@ -85,7 +99,18 @@ class ArticlesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_article
-    @article = Article.find(params[:id])
+    # p "======================================="
+    # p params
+    # @article = Article.find(params[:slug])
+    @article = Article.find_by_slug(params[:slug])
+    p "======================================="
+    p @article
+    # @article = Article.find_by_slug(params[:slug])
+    # @article = Article.find_by(slug: params[:slug])
+    # p "======================================="
+    # p @article
+    # @article = Article.find_by(slug: params[:slug])
+    # @article = Article.find(params[:slug])
   end
 
   # Only allow a list of trusted parameters through.

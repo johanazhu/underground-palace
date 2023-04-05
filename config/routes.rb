@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # 复数形式
   # resources :articles
-  resources :articles do
+  resources :articles, param: :slug do
     resources :comments, only: [:create, :destroy]
 
     member do

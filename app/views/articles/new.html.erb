@@ -1,9 +1,7 @@
 <div class="editor-page">
   <div class="container mt-4">
     <div class="row">
-
-      <%= render "form", post: @article %>
-    
+      <%= render "form", post: @article, ajax_url: articles_path %>
     </div>
   </div>
 </div>

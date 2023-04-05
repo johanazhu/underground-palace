@@ -2,7 +2,7 @@
   <div class="container mt-4">
     <div class="row">
 
-      <%= render "form", post: @article %>
+      <%= render "form", post: @article, ajax_url: article_path(slug: @article.slug) %>
 
     </div>
   </div>

@@ -2,7 +2,15 @@
 
 
 <div class="article-page">
-  <%= render "banner" %>
+  <div class="banner">
+    <div class="container">
+
+      <h1><%= @article.title %></h1>
+
+      <%= render "meta" %>
+
+    </div>
+  </div>
   <div class="container mt-4">
 
     <div class="row article-content">
@@ -12,12 +20,6 @@
         </p>
         <ul class="tag-list p-0">
           <%= render "tag", article: @article %>
-          <!-- <% @article.tags.each do | tag | %>
-            <li class="tag-default tag-pill tag-outline">
-              <%= tag.name %>
-
-            </li>
-          <% end %> -->
         </ul>
       </div>
     </div>

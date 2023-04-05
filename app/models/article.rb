@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+    before_save :generate_slug
 
     validates :title, :description, :body, presence: true
     validates :title, uniqueness: true, on: :create
@@ -25,6 +26,12 @@ class Article < ApplicationRecord
 
     def liked_by?(user)
         likes.where(user_id: user.id).exists?
+    end
+
+    private
+
+    def generate_slug
+        self.slug = title.parameterize
     end
 
 end

@@ -1,6 +1,7 @@
 
 <div class="col-md-10 offset-md-1 col-xs-12">
-  <%= form_for @article, id: "form_box" do |f| %>
+  
+  <%= form_for @article,id: "form_box", url: ajax_url  do |f| %>
     <div class="form-group mt-3">
       <%= f.text_field :title, autofocus: true, autocomplete: "title", 
       class: "form-control form-control-lg",
@@ -34,7 +35,7 @@
 
     <%= f.submit @article.persisted? ? "更新文章" : "发表文章", 
       class: "btn btn-lg btn-primary float-end mt-2" %>
-  <% end %>
+    <% end %>
 </div>
 
 <script>
