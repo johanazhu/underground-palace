@@ -32,54 +32,69 @@
 
       <div class="col-xs-12 col-md-8 offset-md-2">
 
-        <%= form_with(model: [ @article, @article.comments.build ], 
-        local: true, html: { class: "card comment-form mb-3" }) do |f| %>
+        <% if user_signed_in? %>
 
-          <div class="card-block">
-            <%= f.text_area :body, rows: 3, autofocus: true, autocomplete: "body", 
-            class: "form-control",
-            placeholder: "写下你的评论" %>
-          </div>
-          <div class="card-footer">
-            <%= image_tag current_user.avatar, alt: "avatar", class: "comment-author-img" %>
-            <%= f.submit "发表评论", class: "btn btn-sm btn-primary" %>
-          </div>
+          <%= form_with(model: [ @article, @article.comments.build ], 
+            local: true, html: { class: "card comment-form mb-3" }) do |f| %>
 
-        <% end %>
-
-        <% @article.comments.each do |comment| %>
-          <% if comment.body.present? %>
-            <div class="card mb-3">
-              <div class="card-body">
-                <p class="card-text"> <%= comment.body %></p>
-              </div>
-
-              <div class="card-footer">
-                <%= link_to user_profile_path(comment.user.username), class: "comment-author" do %>
-                  <%= image_tag comment.user.avatar, alt: "avatar", class: "comment-author-img" %>
-                <% end %>
-                &nbsp;
-
-                <%= link_to comment.user.username, user_profile_path(comment.user.username), class: 'comment-author' %>
-                
-                <span class="date-articleed"><%= comment.created_at.strftime("%B %d, %Y") %></span>
-              
-                <% if comment.user == current_user %>
-                  <span class="mod-options">
-
-                    <%= button_to [comment.article, comment],
-                                method: :delete,
-                                class: "btn btn-link text-reset" do %>
-                      <i class="fa fa-trash"></i>
-                    <% end %>
-                  
-                  </span>
-                <% end %>
-
-              </div>
+            <div class="card-block">
+              <%= f.text_area :body, rows: 3, autofocus: true, autocomplete: "body", 
+              class: "form-control",
+              placeholder: "写下你的评论" %>
             </div>
+            <div class="card-footer">
+              <%= image_tag current_user.avatar, alt: "avatar", class: "comment-author-img" %>
+              <%= f.submit "发表评论", class: "btn btn-sm btn-primary" %>
+            </div>
+
           <% end %>
+
+          <% @article.comments.each do |comment| %>
+            <% if comment.body.present? %>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <p class="card-text"> <%= comment.body %></p>
+                </div>
+
+                <div class="card-footer">
+                  <%= link_to user_profile_path(comment.user.username), class: "comment-author" do %>
+                    <%= image_tag comment.user.avatar, alt: "avatar", class: "comment-author-img" %>
+                  <% end %>
+                  &nbsp;
+
+                  <%= link_to comment.user.username, user_profile_path(comment.user.username), class: 'comment-author' %>
+                  
+                  <span class="date-articleed"><%= comment.created_at.strftime("%B %d, %Y") %></span>
+                
+                  <% if comment.user == current_user %>
+                    <span class="mod-options">
+
+                      <%= button_to [comment.article, comment],
+                                  method: :delete,
+                                  class: "btn btn-link text-reset" do %>
+                        <i class="fa fa-trash"></i>
+                      <% end %>
+                    
+                    </span>
+                  <% end %>
+
+                </div>
+              </div>
+            <% end %>
+          <% end %>  
+
+
+        <% else %>
+
+          <p>
+            <%= link_to '登录', login_path %> 或者
+            <%= link_to '注册', register_path %> 才能在文章中添加评论
+          </p>      
+
+
         <% end %>
+
+        
 
       </div>
 

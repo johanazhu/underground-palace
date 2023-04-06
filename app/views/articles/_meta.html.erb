@@ -1,56 +1,73 @@
 <div class="article-meta">
 
     <%= link_to user_profile_path(@article.user.username) do %>
-      <%= image_tag @article.user.avatar, alt: "avatar" %>
+        <%= image_tag @article.user.avatar, alt: "avatar" %>
     <% end %>
 
     <div class="info">
-      <%= link_to @article.user.username, user_profile_path(@article.user.username), class: 'author' %>
-      <span class="date"><%= @article.created_at.strftime("%B %d, %Y") %></span>
+        <%= link_to @article.user.username, user_profile_path(@article.user.username), class: 'author' %>
+        <span class="date"><%= @article.created_at.strftime("%B %d, %Y") %></span>
     </div>
 
 
-    <!-- 是否是自己，自己的话，编辑和删除，别人的话，关注作者和收藏文章-->
-    <% if @article.user_id == current_user.id %>
+    <% if user_signed_in? %>
+
+        <!-- 是否是自己，自己的话，编辑和删除，别人的话，关注作者和收藏文章-->
+        <% if @article.user_id == current_user.id %>
+                    
+            <%= link_to edit_article_path, class: "btn btn-sm btn-outline-secondary" do %>
+            <i class="fa-solid fa-pen-to-square"></i>&nbsp;编辑文章 
+            <% end %>
+            <%= button_to article_path, method: :delete, form_class: "d-inline-block", class: "btn btn-sm btn-outline-danger" do %>
+            <i class="fa-solid fa-trash"></i>&nbsp;删除文章 
+            <% end %>
+
+        <% else %>
+
+
+            <% if current_user.following?(@article.user) %>
+                <%= button_to unfollow_user_path(@article.user.username), method: :delete, remote: true,
+                    form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "unfollow-button" do %>
+                    取消关注 <%= @article.user.username %>
+                <% end %>
+            <% else %>
+                <%= button_to follow_user_path(@article.user.username), method: :post, remote: true,
+                    form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
+                    <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @article.user.username %>
+                <% end %>
+            <% end %>
+        
+            &nbsp;
             
-        <%= link_to edit_article_path, class: "btn btn-sm btn-outline-secondary" do %>
-          <i class="fa-solid fa-pen-to-square"></i>&nbsp;编辑文章 
-        <% end %>
-        <%= button_to article_path, method: :delete, form_class: "d-inline-block", class: "btn btn-sm btn-outline-danger" do %>
-          <i class="fa-solid fa-trash"></i>&nbsp;删除文章 
+            <% if @article.liked_by?(current_user) %>
+                <%= button_to unlike_article_path(@article.slug), method: :delete, remote: true,
+                    form_class: "d-inline-block", class: "btn btn-sm btn-primary" do %>
+                    <i class="fa-regular fa-heart"></i>&nbsp;取消喜欢 <span class="counter">
+                        <%= @article.likes.count %></span>
+                <% end %>
+            <% else %>
+                <%= button_to like_article_path(@article.slug), method: :post, remote: true,
+                    form_class: "d-inline-block", class: "btn btn-sm btn-outline-primary" do %>
+                    <i class="fa-solid fa-heart"></i>&nbsp;喜欢 (<span class="counter"><%= @article.likes.count %></span>)
+                <% end %>
+            <% end %>
+
+
         <% end %>
 
     <% else %>
 
-
-        <% if current_user.following?(@article.user) %>
-            <%= button_to unfollow_user_path(@article.user.username), method: :delete, remote: true,
-                form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "unfollow-button" do %>
-                取消关注 <%= @article.user.username %>
-            <% end %>
-        <% else %>
-            <%= button_to follow_user_path(@article.user.username), method: :post, remote: true,
-                form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
-                <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @article.user.username %>
-            <% end %>
-        <% end %>
-       
-        &nbsp;
-        
-        <% if @article.liked_by?(current_user) %>
-            <%= button_to unlike_article_path(@article.slug), method: :delete, remote: true,
-                form_class: "d-inline-block", class: "btn btn-sm btn-primary" do %>
-                <i class="fa-regular fa-heart"></i>&nbsp;取消喜欢 <span class="counter"><%= @article.likes.count %></span>
-            <% end %>
-        <% else %>
-            <%= button_to like_article_path(@article.slug), method: :post, remote: true,
-                form_class: "d-inline-block", class: "btn btn-sm btn-outline-primary" do %>
-                <i class="fa-solid fa-heart"></i>&nbsp;喜欢 (<span class="counter"><%= @article.likes.count %></span>)
-            <% end %>
+        <%= button_to follow_user_path(@article.user.username), method: :post, remote: true,
+            form_class: "d-inline-block", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
+            <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @article.user.username %>
         <% end %>
 
+        <%= button_to like_article_path(@article.slug), method: :post, remote: true,
+            form_class: "d-inline-block", class: "btn btn-sm btn-outline-primary" do %>
+            <i class="fa-solid fa-heart"></i>&nbsp;喜欢 (<span class="counter"><%= @article.likes.count %></span>)
+        <% end %>
 
     <% end %>
-
+    
+    
 </div>
-<div class="alert"></div>
