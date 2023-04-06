@@ -20,7 +20,6 @@
       placeholder: "用 Markdown 编写您的文章" %>
     </div>
     <div class="form-group mt-3">
-      <!-- <%= f.hidden_field :tag_list, id: 'tag-input',  data: { tags: :tag_list }  %> -->
       <%= f.hidden_field :tag_list, id: 'tag-input' %>
     
       <input 
@@ -69,11 +68,7 @@
   tagField.addEventListener('keyup', function(e) {
     if (e.keyCode === 13) { // Enter key
       e.preventDefault();
-      // console.log('tagField', tagField)
-      // console.log('tagField.value', tagField.value)
       addTag(tagField.value);
-      // console.log('getTags()', JSON.stringify(getTags()))
-      // tagInput.dataset.tags = JSON.stringify(getTags());
       tagInput.value = JSON.stringify(getTags())
       tagField.value = '';
     }
@@ -99,12 +94,10 @@
 
   function getTags() {
     return  JSON.parse(tagInput.value || '[]')
-    // return JSON.parse(tagInput.dataset.tags || '[]');
   }
 
   function setTags(tags) {
     tagInput.value = JSON.stringify(tags)
-    // tagInput.dataset.tags = JSON.stringify(tags);
   }
 
 

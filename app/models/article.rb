@@ -16,7 +16,7 @@ class Article < ApplicationRecord
     end
     
     def sync_tags(tag_list)
-        
+
         tagArr = JSON.parse(tag_list)
         # 如果已经有标签，则更新标签列表
         if tags.any?

@@ -38,14 +38,14 @@
         &nbsp;
         
         <% if @article.liked_by?(current_user) %>
-            <%= button_to unlike_article_path(@article), method: :delete, remote: true,
+            <%= button_to unlike_article_path(@article.slug), method: :delete, remote: true,
                 form_class: "d-inline-block", class: "btn btn-sm btn-primary" do %>
-                <i class="fa-regular fa-heart"></i>&nbsp;不喜欢文章 <span class="counter"><%= @article.likes.count %></span>
+                <i class="fa-regular fa-heart"></i>&nbsp;取消喜欢 <span class="counter"><%= @article.likes.count %></span>
             <% end %>
         <% else %>
-            <%= button_to like_article_path(@article), method: :post, remote: true,
+            <%= button_to like_article_path(@article.slug), method: :post, remote: true,
                 form_class: "d-inline-block", class: "btn btn-sm btn-outline-primary" do %>
-                <i class="fa-solid fa-heart"></i>&nbsp;喜欢文章 (<span class="counter"><%= @article.likes.count %></span>)
+                <i class="fa-solid fa-heart"></i>&nbsp;喜欢 (<span class="counter"><%= @article.likes.count %></span>)
             <% end %>
         <% end %>
 
