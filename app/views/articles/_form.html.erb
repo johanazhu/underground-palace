@@ -20,16 +20,23 @@
       placeholder: "用 Markdown 编写您的文章" %>
     </div>
     <div class="form-group mt-3">
+      <!-- <%= f.hidden_field :tag_list, id: 'tag-input',  data: { tags: :tag_list }  %> -->
       <%= f.hidden_field :tag_list, id: 'tag-input' %>
+    
       <input 
         id="tag-field"
         class="form-control" 
         type="text"
         placeholder="输入标签" 
-        onkeydown="addToList(event)"
-        >
+        />
 
       <div class="tag-list mt-1" id="tag-list">
+        <% @article.tags.each do |tag| %>
+          <span class="badge bg-secondary rounded-pill">
+            <i class="fa-solid fa-xmark remove"></i>
+            <%= tag.name %>
+          </span>
+        <% end %>
       </div>
     </div>
 
@@ -39,32 +46,112 @@
 </div>
 
 <script>
-  function addToList(event) {
-      if (event.keyCode === 13) {  // 判断是否为回车键
-        event.preventDefault();  // 阻止默认行为（即提交表单）
 
-        const tagInput = document.getElementById("tag-input");
-        const tagField = document.getElementById("tag-field");
-        const list = document.getElementById("tag-list");
-        let span = `   
+   var tagInput = document.getElementById("tag-input");
+   var tagField = document.getElementById("tag-field");
+   var tagsContainer = document.getElementById("tag-list");
+
+   updateTags();
+
+   document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && event.target.nodeName === 'INPUT') {
+        event.preventDefault();
+      }
+    });
+
+   tagsContainer.addEventListener('click', function(e) {
+      if (e.target && e.target.matches('.remove')) {
+        e.preventDefault();
+        removeTag(e.target.parentNode.textContent.trim());
+      }
+   });
+
+  tagField.addEventListener('keyup', function(e) {
+    if (e.keyCode === 13) { // Enter key
+      e.preventDefault();
+      // console.log('tagField', tagField)
+      // console.log('tagField.value', tagField.value)
+      addTag(tagField.value);
+      // console.log('getTags()', JSON.stringify(getTags()))
+      // tagInput.dataset.tags = JSON.stringify(getTags());
+      tagInput.value = JSON.stringify(getTags())
+      tagField.value = '';
+    }
+  });
+
+  function addTag(tag) {
+    if (!tag) return;
+    var tags = getTags();
+    if (tags.indexOf(tag) !== -1) return;
+    tags.push(tag);
+    setTags(tags);
+    updateTags();
+  }
+
+  function removeTag(tag) {
+    var tags = getTags();
+    var index = tags.indexOf(tag);
+    if (index === -1) return;
+    tags.splice(index, 1);
+    setTags(tags);
+    updateTags();
+  }
+
+  function getTags() {
+    return  JSON.parse(tagInput.value || '[]')
+    // return JSON.parse(tagInput.dataset.tags || '[]');
+  }
+
+  function setTags(tags) {
+    tagInput.value = JSON.stringify(tags)
+    // tagInput.dataset.tags = JSON.stringify(tags);
+  }
+
+
+  function updateTags() {
+    tagsContainer.innerHTML = '';
+    let tags = getTags();
+    console.log('tags', tags)
+  
+    tags.forEach(function(tag) {
+      let span = `   
           <span class="badge bg-secondary rounded-pill">
-            <i class="fa-solid fa-xmark"></i>
-            ${tagField.value}
+            <i class="fa-solid fa-xmark remove"></i>
+            ${tag}
           </span>`
-        list.insertAdjacentHTML('beforeend', span);
+        tagsContainer.insertAdjacentHTML('beforeend', span);
+    });
+  }
+
+  
+// function addToList(event) {
+//       if (event.keyCode === 13) {  // 判断是否为回车键
+//         event.preventDefault();  // 阻止默认行为（即提交表单）
+
+//         const tagInput = document.getElementById("tag-input");
+//         const tagField = document.getElementById("tag-field");
+//         const list = document.getElementById("tag-list");
+//         let span = `   
+//           <span class="badge bg-secondary rounded-pill">
+//             <i class="fa-solid fa-xmark"></i>
+//             ${tagField.value}
+//           </span>`
+//         list.insertAdjacentHTML('beforeend', span);
     
 
-        let form = document.getElementById("new_article");
-        let tagList = document.getElementById("tag-list")
+//         let form = document.getElementById("new_article");
+//         // console.log('form', form)
+//         let tagList = document.getElementById("tag-list")
 
-        const currentTags = JSON.parse(tagInput.value || '[]')
-        console.log(currentTags)
-        currentTags.push(tagField.value)
-        tagInput.value = JSON.stringify(currentTags)
+//         const currentTags = JSON.parse(tagInput.value || '[]')
+//         console.log(currentTags)
+//         currentTags.push(tagField.value)
+//         tagInput.value = JSON.stringify(currentTags)
 
 
-        tagField.value = "";
+//         tagField.value = "";
 
-      }
-  }
+//       }
+//   }
 </script>
+

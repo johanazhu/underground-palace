@@ -27,8 +27,6 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    p "11111111111111111111111"
-    p "current_user.articles"
     @article = current_user.articles.new(article_params.except(:tag_list))
 
     respond_to do |format|
@@ -47,14 +45,9 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1 or /articles/1.json
   def update
     respond_to do |format|
-      p "++++++++++++++++++++++++++"
-      p article_params
-      p  @article
-      
-      # p current_user.article
+
       if @article.update(article_params.except(:tag_list))
-      # if current_user.articles.update(article_params.except(:tag_list))
-        # current_user.articles.sync_tags(article_params[:tag_list])
+        @article.sync_tags(article_params[:tag_list])
         format.html { redirect_to article_url(@article.slug) }
         format.json { render :show, status: :ok, location: @article }
         flash[:notice] = "文章更新成功"
@@ -99,18 +92,7 @@ class ArticlesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_article
-    # p "======================================="
-    # p params
-    # @article = Article.find(params[:slug])
     @article = Article.find_by_slug(params[:slug])
-    p "======================================="
-    p @article
-    # @article = Article.find_by_slug(params[:slug])
-    # @article = Article.find_by(slug: params[:slug])
-    # p "======================================="
-    # p @article
-    # @article = Article.find_by(slug: params[:slug])
-    # @article = Article.find(params[:slug])
   end
 
   # Only allow a list of trusted parameters through.

@@ -12,10 +12,12 @@ class Article < ApplicationRecord
     has_and_belongs_to_many :tags
 
     def tag_list
-        tags.map(&:name).join(",")
+        tags.map(&:name).to_json
     end
     
     def sync_tags(tag_list)
+        p "==============================="
+        p tag_list
         tagArr = JSON.parse(tag_list)
         tagArr.each do |tag_name|
             tag = Tag.find_or_create_by(name: tag_name)
