@@ -16,9 +16,13 @@ class Article < ApplicationRecord
     end
     
     def sync_tags(tag_list)
-        p "==============================="
-        p tag_list
+        
         tagArr = JSON.parse(tag_list)
+        # 如果已经有标签，则更新标签列表
+        if tags.any?
+            # 删除原有标签
+            tags.destroy_all
+        end
         tagArr.each do |tag_name|
             tag = Tag.find_or_create_by(name: tag_name)
 
