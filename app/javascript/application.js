@@ -5,9 +5,9 @@ import * as bootstrap from "bootstrap"
 import $ from 'jquery'
 import {} from 'jquery-ujs'
 
+// for view/articles/feed.html.erb
 $(function() {
     $(".nav-link").on('click', function () {
-      console.log('点击')
       $(".nav-link").removeClass("active");
       $(this).addClass("active");
     })

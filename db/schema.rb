@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_07_025301) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_07_073721) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -26,6 +26,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_025301) do
   create_table "articles_tags", id: false, force: :cascade do |t|
     t.integer "article_id", null: false
     t.integer "tag_id", null: false
+  end
+
+  create_table "articles_users", id: false, force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "comments", force: :cascade do |t|

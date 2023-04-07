@@ -17,9 +17,8 @@ class CommentsController < ApplicationController
     private
 
     def set_article!
-        p "================================="
-        p params
-        # @article = Article.find_by_slug(params[:article_slug])
+        # p "================================="
+        # p params
         @article = Article.find(params[:article_slug])
     end
 
