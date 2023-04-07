@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   scope :profiles do
     # 显示用户资料页面
     get ':username', to: 'profiles#show', as: :user_profile
+    
+    # 显示用户喜欢的文章
+    get ':username/likes', to: 'profiles#likes', as: :user_likes
   
     # 关注用户
     post ':username/follow', to: 'profiles#follow', as: :follow_user

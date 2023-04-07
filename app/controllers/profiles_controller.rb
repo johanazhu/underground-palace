@@ -1,8 +1,13 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_user!, except: [:show]
+    before_action :authenticate_user!, except: [:show, :like ]
     before_action :set_profile
 
     def show
+    end
+
+    def likes
+        likes =  Like.where(user_id: @user.id)
+        @articles = Article.where(id: likes.pluck(:article_id))
     end
 
     def follow

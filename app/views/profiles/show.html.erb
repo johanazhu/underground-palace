@@ -52,11 +52,15 @@
         <div class="article-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a class="nav-link active" href="#">我的文章</a>
+              <%= link_to '我的文章', user_profile_path, 
+              class: 'nav-link' + (current_page?(user_profile_path) ? ' active' : '') %>
             </li>
+      
             <li class="nav-item">
-              <a class="nav-link" href="#">收藏的文章</a>
+              <%= link_to '喜欢的文章', user_likes_path,
+              class: 'nav-link' + (current_page?(user_likes_path) ? ' active' : '') %>
             </li>
+
           </ul>
         </div>
         
