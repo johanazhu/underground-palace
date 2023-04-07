@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   # , only: [:show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  root "articles#feed"
+  root to: redirect('/articles/feed')
+  # root "articles#feed"
   # root "rails/welcome#index"
 end
