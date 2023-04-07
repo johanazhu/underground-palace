@@ -7,13 +7,17 @@
 
         <%= render "feed" %>
         <div id="articles">
-          <% @articles.each do |article| %>
-            <%= render article %>
+          <% if @articles.empty? %>
+            <div class="article-preview">目前还没有文章。</div>
+          <% else %>
+            <% @articles.each do |article| %>
+              <%= render article %>
+            <% end %>
           <% end %>
         </div>
         
       </div>
-      
+
       <div class="col-md-4 themed-grid-col">
         <%= render "taglist", tags: @popular_tags %>
       </div>

@@ -1,0 +1,44 @@
+<div class="user-info">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+          <%= image_tag @user.avatar, alt: "avatar", class: "user-img" %>
+          <h4><%= @user.username %></h4>
+          <p><%= @user.bio %></p>
+
+          <% if user_signed_in? %>
+            <% if @user.id == current_user.id %>
+
+              <%= link_to settings_path, class: "btn btn-sm btn-outline-secondary action-btn" do %>
+                <i class="fa-solid fa-gear"></i>&nbsp; 编辑个人信息
+              <% end %>
+
+            <% else %>
+
+            <% if current_user.following?(@user) %>
+              <%= button_to unfollow_user_path(@user.username), method: :delete, remote: true,
+                  form_class: "d-inline-block float-end", class: "btn btn-sm btn-outline-secondary", id: "unfollow-button" do %>
+                  取消关注 <%= @user.username %>
+              <% end %>
+            <% else %>
+              <%= button_to follow_user_path(@user.username), method: :post, remote: true,
+                  form_class: "d-inline-block float-end", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
+                  <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @user.username %>
+              <% end %>
+            <% end %>
+
+
+            <% end %>
+          <% else %>
+              <%= button_to follow_user_path(@user.username), method: :post, remote: true,
+                form_class: "d-inline-block float-end", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
+                <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @user.username %>
+              <% end %>
+          <% end %>
+
+        </div>
+
+      </div>
+    </div>
+  </div>

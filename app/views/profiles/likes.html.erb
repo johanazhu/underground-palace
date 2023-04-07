@@ -1,49 +1,6 @@
 <div class="profile-page">
 
-    <div class="user-info">
-      <div class="container">
-        <div class="row">
-  
-          <div class="col-md-10 col-md-offset-1">
-            <%= image_tag @user.avatar, alt: "avatar", class: "user-img" %>
-            <h4><%= @user.username %></h4>
-            <p><%= @user.bio %></p>
-  
-            <% if user_signed_in? %>
-              <% if @user.id == current_user.id %>
-  
-                <%= link_to settings_path, class: "btn btn-sm btn-outline-secondary action-btn" do %>
-                  <i class="fa-solid fa-gear"></i>&nbsp; 编辑个人信息
-                <% end %>
-  
-              <% else %>
-  
-              <% if current_user.following?(@user) %>
-                <%= button_to unfollow_user_path(@user.username), method: :delete, remote: true,
-                    form_class: "d-inline-block float-end", class: "btn btn-sm btn-outline-secondary", id: "unfollow-button" do %>
-                    取消关注 <%= @user.username %>
-                <% end %>
-              <% else %>
-                <%= button_to follow_user_path(@user.username), method: :post, remote: true,
-                    form_class: "d-inline-block float-end", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
-                    <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @user.username %>
-                <% end %>
-              <% end %>
-  
-  
-              <% end %>
-            <% else %>
-                <%= button_to follow_user_path(@user.username), method: :post, remote: true,
-                  form_class: "d-inline-block float-end", class: "btn btn-sm btn-outline-secondary", id: "follow-button" do %>
-                  <i class="fa-solid fa-plus"></i>&nbsp;关注 <%= @user.username %>
-                <% end %>
-            <% end %>
-  
-          </div>
-  
-        </div>
-      </div>
-    </div>
+    <%= render "userinfo" %>
   
     <div class="container">
       <div class="row">
@@ -64,25 +21,33 @@
             </ul>
           </div>
           
-  
-          <% @articles.each do |article| %>
-            <div class="article-preview"> 
-  
-              <div class="article-meta mb-3">
+          <% if @articles.empty? %>
+              <div class="article-preview">目前还没有文章。</div>
+          <% else %>
+            <% @articles.each do |article| %>
+              <div class="article-preview"> 
     
-                <%= link_to user_profile_path(article.user.username) do %>
-                  <%= image_tag article.user.avatar, alt: "avatar" %>
-                <% end %>
-            
-                <div class="info">
-                  <%= link_to article.user.username, user_profile_path(article.user.username), class: 'author' %>
-                  <span class="date"><%= article.created_at.strftime("%B %d, %Y") %></span>
-                </div>
-                <% if current_user %>
-                  <% if article.liked_by?(current_user) %>
-                    <%= button_to unlike_article_path(article.slug), method: :delete, remote: true,
-                      form_class: "d-inline-block float-end", class: "btn btn-primary btn-sm " do %>
-                      <i class="fa-solid fa-heart"></i>&nbsp;<span class="counter"><%= article.likes.count %></span>
+                <div class="article-meta mb-3">
+      
+                  <%= link_to user_profile_path(article.user.username) do %>
+                    <%= image_tag article.user.avatar, alt: "avatar" %>
+                  <% end %>
+              
+                  <div class="info">
+                    <%= link_to article.user.username, user_profile_path(article.user.username), class: 'author' %>
+                    <span class="date"><%= article.created_at.strftime("%B %d, %Y") %></span>
+                  </div>
+                  <% if current_user %>
+                    <% if article.liked_by?(current_user) %>
+                      <%= button_to unlike_article_path(article.slug), method: :delete, remote: true,
+                        form_class: "d-inline-block float-end", class: "btn btn-primary btn-sm " do %>
+                        <i class="fa-solid fa-heart"></i>&nbsp;<span class="counter"><%= article.likes.count %></span>
+                      <% end %>
+                    <% else %>
+                      <%= button_to like_article_path(article.slug), method: :post, remote: true,
+                          form_class: "d-inline-block float-end", class: "btn btn-outline-primary btn-sm" do %>
+                          <i class="fa-regular fa-heart"></i>&nbsp;<span class="counter"><%= article.likes.count %></span>
+                      <% end %>
                     <% end %>
                   <% else %>
                     <%= button_to like_article_path(article.slug), method: :post, remote: true,
@@ -90,26 +55,20 @@
                         <i class="fa-regular fa-heart"></i>&nbsp;<span class="counter"><%= article.likes.count %></span>
                     <% end %>
                   <% end %>
-                <% else %>
-                  <%= button_to like_article_path(article.slug), method: :post, remote: true,
-                      form_class: "d-inline-block float-end", class: "btn btn-outline-primary btn-sm" do %>
-                      <i class="fa-regular fa-heart"></i>&nbsp;<span class="counter"><%= article.likes.count %></span>
-                  <% end %>
+                </div>
+              
+                <%= link_to article_path(article.slug), class: "article-link" do %>
+                  <h1><%= article.title %></h1>
+                  <p><%= article.description %></p>
+                  <span>Read more...</span>
+                  <ul class="tag-list">
+                    <%= render "articles/tag", article: article %>
+                  </ul>
                 <% end %>
+    
               </div>
-            
-              <%= link_to article_path(article.slug), class: "article-link" do %>
-                <h1><%= article.title %></h1>
-                <p><%= article.description %></p>
-                <span>Read more...</span>
-                <ul class="tag-list">
-                  <%= render "articles/tag", article: article %>
-                </ul>
-              <% end %>
-  
-            </div>
+            <% end %>
           <% end %>
-  
         </div>
   
       </div>
