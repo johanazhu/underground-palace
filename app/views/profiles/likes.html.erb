@@ -68,6 +68,10 @@
     
               </div>
             <% end %>
+            <div class="text-center">
+              <%= paginate @articles, theme: 'bootstrap-5',
+              pagination_class: "flex-wrap justify-content-center" %>
+            </div>
           <% end %>
         </div>
   
