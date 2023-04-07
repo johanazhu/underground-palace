@@ -1,16 +1,14 @@
 <div class="feed-toggle">
     <ul class="nav nav-pills outline-active">
 
-      <li class="nav-item" show-authed="true" style="display: inherit;">
-        <a href="" class="nav-link active">
-          订阅
-        </a>
+      <li class="nav-item">
+        <%= link_to '订阅', feed_articles_path, 
+        class: 'nav-link' + (current_page?(feed_articles_path) ? ' active' : '') %>
       </li>
 
       <li class="nav-item">
-        <a href="" class="nav-link" >
-          热门
-        </a>
+        <%= link_to '热门', articles_path,
+        class: 'nav-link' + (current_page?(articles_path) ? ' active' : '') %>
       </li>
     </ul>
 </div>
