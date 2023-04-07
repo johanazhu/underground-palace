@@ -4,12 +4,19 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.order(created_at: :desc).includes(:user)
     # 获取最受欢迎的十大标签
     tag_counts = Tag.joins(:articles_tags).group(:tag_id).order('count_all desc').limit(10).count
     popular_tag_ids = tag_counts.keys
     @popular_tags = Tag.where(id: popular_tag_ids).sort_by { |t| popular_tag_ids.index(t.id) }
  
+  end
+
+
+  
+  def feed
+    user =  User.find(current_user.following_ids)
+    @articles = Article.order(created_at: :desc).where(user:user).includes(:user)
   end
 
   # GET /articles/1 or /articles/1.json

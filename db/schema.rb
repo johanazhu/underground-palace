@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_094357) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_07_025301) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -54,12 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_094357) do
     t.datetime "updated_at", null: false
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
     t.index ["following_id"], name: "index_relationships_on_following_id"
-  end
-
-  create_table "tag1s", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|

@@ -10,6 +10,7 @@ class Article < ApplicationRecord
     # has_many :tag, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_and_belongs_to_many :tags
+    has_and_belongs_to_many :users
 
     def tag_list
         tags.map(&:name).to_json

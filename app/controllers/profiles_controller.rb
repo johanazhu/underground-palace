@@ -3,9 +3,6 @@ class ProfilesController < ApplicationController
     before_action :set_profile
 
     def show
-        p "=========================="
-        p @user.articles
-        p 
     end
 
     def follow

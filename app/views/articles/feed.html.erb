@@ -1,0 +1,19 @@
+
+
+<div class="home-page">
+    <div class="container mt-4">
+      <div class="row mb-3">
+        <div class="col-md-8 themed-grid-col">
+  
+          <%= render "feed" %>
+          <div id="articles">
+            <% @articles.each do |article| %>
+              <%= render article %>
+            <% end %>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
