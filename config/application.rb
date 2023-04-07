@@ -12,6 +12,8 @@ module UndergroundPalace
     config.load_defaults 7.0
 
     config.i18n.default_locale = "zh-CN"
+    # config.i18n.available_locales = [:en, :'zh-CN']
+    # config.i18n.default_locale :'zh-CN'
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

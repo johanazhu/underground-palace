@@ -81,3 +81,6 @@ gem "cssbundling-rails", "~> 1.1"
 gem "jsbundling-rails", "~> 1.1"
 gem "devise", "~> 4.9"
 gem 'devise-i18n'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
+gem 'kaminari-i18n'

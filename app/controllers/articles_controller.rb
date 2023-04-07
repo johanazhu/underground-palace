@@ -4,7 +4,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.order(created_at: :desc).includes(:user)
+    @articles = Article.page(params[:page]).order(created_at: :desc).includes(:user)
+    # @articles = Article.order(created_at: :desc).includes(:user)
     # 获取最受欢迎的十大标签
     tag_counts = Tag.joins(:articles_tags).group(:tag_id).order('count_all desc').limit(10).count
     popular_tag_ids = tag_counts.keys
