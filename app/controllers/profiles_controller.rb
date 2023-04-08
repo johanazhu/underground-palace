@@ -3,11 +3,13 @@ class ProfilesController < ApplicationController
     before_action :set_profile
 
     def show
+        # 对某个用户写的文章进行分页
+        @articles = @user.articles.page(params[:page]).order(created_at: :desc)
     end
 
     def likes
         likes =  Like.where(user_id: @user.id)
-        @articles = Article.where(id: likes.pluck(:article_id))
+        @articles = Article.page(params[:page]).where(id: likes.pluck(:article_id)).order(created_at: :desc)
     end
 
     def follow

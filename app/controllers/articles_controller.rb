@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
   
   def feed
     user =  User.find(current_user.following_ids)
-    @articles = Article.order(created_at: :desc).where(user:user).includes(:user)
+    @articles = Article.page(params[:page]).order(created_at: :desc).where(user:user).includes(:user)
 
     # 获取最受欢迎的十大标签
     tag_counts = Tag.joins(:articles_tags).group(:tag_id).order('count_all desc').limit(10).count

@@ -21,11 +21,11 @@
           </ul>
         </div>
         
-        <% if @user.articles.empty? %>
+        <% if @articles.empty? %>
           <div class="article-preview">目前还没有文章。</div>
         <% else %>
 
-          <% @user.articles.each do |article| %>
+          <% @articles.each do |article| %>
             <div class="article-preview"> 
 
               <div class="article-meta mb-3">
