@@ -38,7 +38,8 @@ class Article < ApplicationRecord
     private
 
     def generate_slug
-        self.slug = title.parameterize
+        # self.slug = title.parameterize
+        self.slug = title.to_s.downcase.gsub(/[^a-z0-9\u4e00-\u9fa5]+/, '-').gsub(/|-$/, '')
     end
 
 end
