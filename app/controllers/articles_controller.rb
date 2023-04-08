@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy like unlike ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :feed, :show]
 
   # GET /articles or /articles.json
   def index
@@ -16,8 +16,12 @@ class ArticlesController < ApplicationController
 
   
   def feed
-    user =  User.find(current_user.following_ids)
-    @articles = Article.page(params[:page]).order(created_at: :desc).where(user:user).includes(:user)
+    if current_user.present? 
+      user =  User.find(current_user.following_ids)
+      @articles = Article.page(params[:page]).order(created_at: :desc).where(user:user).includes(:user)
+    else 
+      @articles = []
+    end
 
     # 获取最受欢迎的十大标签
     tag_counts = Tag.joins(:articles_tags).group(:tag_id).order('count_all desc').limit(10).count
