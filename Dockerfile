@@ -26,6 +26,16 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential libpq-dev pkg-config
 
+
+# Install yarn
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get update && \
+    apt-get install -y nodejs npm && \
+    npm install -g yarn
+
+RUN node -v
+RUN yarn -v
+
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
 RUN bundle install && \
@@ -72,4 +82,5 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+# CMD ["./bin/rails", "server"]
+CMD ["./bin/dev"]
